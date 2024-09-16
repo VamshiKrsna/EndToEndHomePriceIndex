@@ -1,0 +1,50 @@
+1. CPIAUCSL : Consumer Price Index for All Urban Consumers: Seasonally Adjusted (CPI-U)
+   Measures average change in prices of a basket of goods and services consumed by urban households.
+   Higher the value, Higher the Inflation & Home Prices and vice versa.
+
+2. CSUSHPISA : S&P Case-Shiller US National Home Price Index.
+    Proxy for home prices (estimate of house prices)
+    This is our target value.
+
+3. FEDFUNDS : Effective Federal Funds Rate
+    This is the rate at which commercial banks borrow and lend their excess reserves to each other overnight.
+    Influences mortgage rates, directly affecting home prices.
+
+4. GDP : Gross Domestic Product 
+    Total value of goods and services produced within a country's borders
+    Higher GDP = Higher Inflation = Higher Home Prices.
+
+5. HOUST : Housing Starts
+    No. of new residential construction projects begun during a period.
+    High values = High Demand = High Prices, Vice versa
+
+6. MCOILWTICO : Crude Oil Prices (West Texas)
+    Added this as an experimental feature to observe any relation between crude oil and home prices.
+
+7. MEHOINUSA672N: Median Household Income
+    Middle values of Household incomes in the US
+    High Income = High Purchase Power = High Home Price, vice versa.
+
+8. MORTGAGE15US : 15 Years Fixed rate mortgage average
+    average interest rates on 15 year fixed rate mortgages
+    low mortgage = high purchase rate, vice versa
+
+9. MORTGAGE30US : 
+    30 Years Fixed rate mortgage average
+    average interest rates on 30 year fixed rate mortgages
+    low mortgage = high purchase rate, vice versa
+
+10. POP : 
+    Population in the US 
+    High Population = High Demand = High Prices , vice versa.
+
+11. UNRATE : 
+    Unemployment Rate 
+    Low Unemployment = High Purchase Power = High Prices, vice versa.
+
+
+
+Note : Higher Inflation doesn't essentially mean Higher Home Price, 
+       Higher Inflation may cripple the purchasing power of the consumers, leading to lower prices.
+       But it is has a complex relation.
+       
