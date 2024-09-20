@@ -1,3 +1,4 @@
+# This script fetches and saves data from FRED API Into CSV Files in data/ directory.
 import os
 import logging
 import pandas as pd
@@ -27,6 +28,7 @@ class FredDataIngestion:
             'MORTGAGE30US',  # 30 Years Fixed rate mortgage average
             'POP',  # Population in the US
             'UNRATE'  # Unemployment Rate
+            'PERMIT' # Housing Permits
         ]
         
         # Create data directory if not exists
