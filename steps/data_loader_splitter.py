@@ -1,9 +1,13 @@
 import os
+import sys
 import logging
 import numpy as np
 import pandas as pd
 from typing import Union
 from sklearn.model_selection import train_test_split
+
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(str(root))
 
 class DataLoaderStrategy:
     """Data Loading Class"""
@@ -36,8 +40,8 @@ class DataDivideStrategy:
             logging.error(e)
             raise e
         
-df = DataLoaderStrategy().handle_data("../data/Final.csv")
-print(df)
+# df = DataLoaderStrategy().handle_data("../data/Final.csv")
+# print(df)
 
-X_train, X_test, y_train, y_test = DataDivideStrategy().split_data(df)
-print(X_train, X_test, y_train, y_test)
+# X_train, X_test, y_train, y_test = DataDivideStrategy().split_data(df)
+# print(X_train, X_test, y_train, y_test)

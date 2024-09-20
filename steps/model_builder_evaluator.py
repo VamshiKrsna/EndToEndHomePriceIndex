@@ -1,4 +1,6 @@
 import os
+import sys
+import pickle
 import datetime
 from abc import ABC, abstractmethod
 from typing import Union
@@ -8,6 +10,9 @@ from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from xgboost import XGBRegressor  # Ensure XGBoost is installed
 import pandas as pd
 from data_loader_splitter import DataLoaderStrategy, DataDivideStrategy
+
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(str(root))  
 
 class ModelBuilder(ABC):
     """
@@ -33,7 +38,7 @@ class BestModelFinder(ABC):
     def find_best_model(self, df: pd.DataFrame) -> Union[LinearRegression, DecisionTreeRegressor, RandomForestRegressor, XGBRegressor]:
         pass
 
-    def save_best_model(self, model, model_name: str):
+    def save_best_model_info(self, model, model_name: str):
         """
         Saves the best model's information to a CSV file in the "models/" directory.
         """
@@ -44,6 +49,16 @@ class BestModelFinder(ABC):
         os.makedirs(models_path, exist_ok=True)
         df.to_csv(f'{models_path}/{model_name}_{dt_info}_info.csv', index=False)
         print(f"Model saved to models/{model_name}_{dt_info}_info.csv")
+    
+    def save_best_model(self, model, model_name: str):
+        """
+        Saves the best model to a pickle file in the "models/" directory.
+        """
+        model_path = os.path.join(os.getcwd(),"..",'saved_models')
+        os.makedirs(model_path, exist_ok=True)
+        with open(f'{model_path}/{model_name}.pkl', 'wb') as f:
+            pickle.dump(model, f)
+        print(f"Model saved to models/{model_name}.pkl")    
 
 
 class ConcreteBestModelFinder(BestModelFinder):
@@ -78,6 +93,7 @@ class ConcreteBestModelFinder(BestModelFinder):
                 best_model_name = model_name
                 best_model = model
 
+        self.save_best_model_info(best_model, best_model_name)
         self.save_best_model(best_model, best_model_name)
         return best_model
 
