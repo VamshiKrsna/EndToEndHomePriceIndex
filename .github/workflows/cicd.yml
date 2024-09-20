@@ -28,7 +28,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest  # or the specific test command for your project
+          pytest 
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
           STREAMLIT_EMAIL: ${{ secrets.STREAMLIT_EMAIL }}
           STREAMLIT_PASSWORD: ${{ secrets.STREAMLIT_PASSWORD }}
         run: |
-          streamlit run app.py  # Replace `app.py` with your main Streamlit app file
+          streamlit run app.py  
 
   mlops:
     runs-on: ubuntu-latest
@@ -75,5 +75,4 @@ jobs:
 
       - name: Run MLOps Pipeline
         run: |
-          # Your specific MLOps commands, e.g., triggering MLFlow, ZenML, etc.
-          python run_mlops_pipeline.py  # Adjust according to your MLOps pipeline script
+          python model_build_mlflow.py  
