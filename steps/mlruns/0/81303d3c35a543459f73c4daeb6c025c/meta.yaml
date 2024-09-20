@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Rizen3/Desktop/Vamshi/Machine%20Learning%20and%20DSA/SelfProjects/EndToEndHomePriceIndex/steps/mlruns/0/81303d3c35a543459f73c4daeb6c025c/artifacts
+end_time: 1726852013452
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 81303d3c35a543459f73c4daeb6c025c
+run_name: angry-skunk-586
+run_uuid: 81303d3c35a543459f73c4daeb6c025c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726851983595
+status: 3
+tags: []
+user_id: Rizen3

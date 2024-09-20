@@ -4,15 +4,21 @@ import pickle
 import datetime
 from abc import ABC, abstractmethod
 from typing import Union
+import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 from xgboost import XGBRegressor  # Ensure XGBoost is installed
 import pandas as pd
-from .data_loader_splitter import DataLoaderStrategy, DataDivideStrategy
+import mlflow
+import mlflow.sklearn
+from data_loader_splitter import DataLoaderStrategy, DataDivideStrategy
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(str(root))  
+sys.path.append(str(root))
+
+mlflow.set_tracking_uri("http://localhost:5000")
 
 class ModelBuilder(ABC):
     """
@@ -25,7 +31,7 @@ class ModelBuilder(ABC):
         X_train, X_test, y_train, y_test = DataDivideStrategy().split_data(df)
         model = self.model_cls()
         model.fit(X_train, y_train)
-        return model
+        return model, X_test, y_test
 
     def evaluate_model(self, model, X_test, y_test) -> float:
         return model.score(X_test, y_test)  # R^2 Score of the model
@@ -82,10 +88,20 @@ class ConcreteBestModelFinder(BestModelFinder):
         best_score = float('-inf')
         best_model = None
 
+        mlflow.start_run()  # Start of MLflow run
+
         for model_name, builder in self.models.items():
-            model = builder.build_model(df)
-            X_train, X_test, y_train, y_test = DataDivideStrategy().split_data(df)
+            model, X_test, y_test = builder.build_model(df)
             score = builder.evaluate_model(model, X_test, y_test)
+            y_pred = model.predict(X_test)
+            mse = mean_squared_error(y_test, y_pred)
+            rmse = np.sqrt(mse)
+            # Logging parameters and metrics to MLflow
+            mlflow.log_param(f"model_name_{model_name}", model_name)
+            mlflow.log_metric(f"{model_name}_rmse", rmse)
+            mlflow.log_metric(f"{model_name}_mae", mean_absolute_error(y_test, y_pred))
+            mlflow.log_metric(f"{model_name}_score", score)
+            mlflow.sklearn.log_model(model, model_name)
 
             print(f"{model_name} Score: {score}")
             if score > best_score:
@@ -95,6 +111,11 @@ class ConcreteBestModelFinder(BestModelFinder):
 
         self.save_best_model_info(best_model, best_model_name)
         self.save_best_model(best_model, best_model_name)
+        
+        # Logging the best model to MLflow
+        mlflow.sklearn.log_model(best_model, best_model_name)
+        mlflow.end_run()  # End MLflow run
+
         return best_model
 
 class LinearRegressionBuilder(ModelBuilder):

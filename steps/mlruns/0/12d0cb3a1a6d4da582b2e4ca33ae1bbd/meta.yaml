@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Rizen3/Desktop/Vamshi/Machine%20Learning%20and%20DSA/SelfProjects/EndToEndHomePriceIndex/steps/mlruns/0/12d0cb3a1a6d4da582b2e4ca33ae1bbd/artifacts
+end_time: 1726851851708
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 12d0cb3a1a6d4da582b2e4ca33ae1bbd
+run_name: learned-stag-234
+run_uuid: 12d0cb3a1a6d4da582b2e4ca33ae1bbd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1726851851268
+status: 3
+tags: []
+user_id: Rizen3
