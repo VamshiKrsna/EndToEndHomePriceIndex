@@ -6,7 +6,7 @@ matplotlib
 seaborn
 plotly
 fredapi
-mlflow
+mlflow==2.16.2
 os
 sys
 xgboost
