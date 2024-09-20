@@ -25,6 +25,7 @@ class DataDivideStrategy:
         Divides the data into train and test data.
         """
         try:
+            data = data.drop("date",axis = 1)
             X = data.drop("Home Price Index", axis=1)
             y = data["Home Price Index"]
             X_train, X_test, y_train, y_test = train_test_split(
