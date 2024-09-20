@@ -7,6 +7,3 @@ seaborn
 plotly
 fredapi
 mlflow
-os
-sys
-xgboost
